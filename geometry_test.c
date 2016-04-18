@@ -15,12 +15,15 @@
 
 #include "geometry.h"
 
+//test cases
+
 /* coord_2d_eq Test */
 START_TEST(test_2d_eq)
 {
     coord_2d_t a;
     coord_2d_t b;
 
+    //these tests expected to pass
     a.x = b.x = 0;
     a.y = b.y = 0;
     ck_assert(coord_2d_eq(&a, &b));
@@ -33,6 +36,7 @@ START_TEST(test_2d_eq)
     a.y = b.y = 9.99;
     ck_assert(coord_2d_eq(&a, &b));
 
+    //these tests expected to fail
     a.x = 3.33;
     a.y = 9.99;
     b.x = 3.33;
@@ -150,11 +154,11 @@ Suite* coord_2d_suite(void)
 {
 
     /* Create Suite */
-    Suite* s = suite_create("coord_2d");
+    Suite* s = suite_create("coord_2d"); //suite created named coord_2d
 
     /* Setup Test Cases */
-    TCase* tc_2d_eq = tcase_create("coord_2d_eq");
-    tcase_add_test(tc_2d_eq, test_2d_eq);
+    TCase* tc_2d_eq = tcase_create("coord_2d_eq"); //test created, assigned to pointer variable
+    tcase_add_test(tc_2d_eq, test_2d_eq);  //adding to test case pointer object
 
     TCase* tc_2d_dist = tcase_create("coord_2d_dist");
     tcase_add_test(tc_2d_dist, test_2d_dist);
@@ -176,12 +180,12 @@ Suite* coord_2d_suite(void)
 int main(void){
 
     int failed = 0;
-    Suite* s = coord_2d_suite();
-    SRunner* sr = srunner_create(s);
-    srunner_run_all(sr, CK_VERBOSE);
-    failed = srunner_ntests_failed(sr);
+    Suite* s = coord_2d_suite();        //create object, returns pointer object s of type Suite
+    SRunner* sr = srunner_create(s);    //create runner object for suite object
+    srunner_run_all(sr, CK_VERBOSE);    //runs all test cases
+    failed = srunner_ntests_failed(sr); //check for failures
     srunner_free(sr);
 
-    return (failed ? EXIT_FAILURE : EXIT_SUCCESS);
+    return (failed ? EXIT_FAILURE : EXIT_SUCCESS); //returns if there are failures
 
 }
